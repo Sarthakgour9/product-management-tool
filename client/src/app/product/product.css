@@ -1,0 +1,102 @@
+.container{
+width: 900px;
+margin: auto;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+.title{
+text-align:center;
+margin-bottom:20px;
+}
+
+.form-card{
+background:#f9f9f9;
+padding:20px;
+border-radius:10px;
+box-shadow:0 3px 8px rgba(0,0,0,0.1);
+margin-bottom:30px;
+}
+
+.form-group{
+margin-bottom:15px;
+}
+
+input,select{
+width:100%;
+padding:10px;
+border-radius:6px;
+border:1px solid #ccc;
+font-size:14px;
+}
+
+.save-btn{
+background:#4CAF50;
+color:white;
+border:none;
+padding:10px 20px;
+border-radius:6px;
+cursor:pointer;
+}
+
+.save-btn:hover{
+background:#45a049;
+}
+
+.table-card{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 3px 8px rgba(0,0,0,0.1);
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th{
+background:#007bff;
+color:white;
+padding:10px;
+}
+
+td{
+padding:10px;
+text-align:center;
+border-bottom:1px solid #ddd;
+}
+
+tr:hover{
+background:#f1f1f1;
+}
+
+.delete-btn{
+background:#e74c3c;
+color:white;
+border:none;
+padding:6px 12px;
+border-radius:5px;
+cursor:pointer;
+}
+
+.delete-btn:hover{
+background:#c0392b;
+}
+
+.status{
+padding:4px 10px;
+border-radius:5px;
+color:rgb(255, 0, 0);
+}
+
+.active{
+background:#2ecc71;
+}
+
+.inactive{
+background:#e67e22;
+}
+
+.outofstock{
+background:#e74c3c;
+}

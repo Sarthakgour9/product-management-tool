@@ -1,0 +1,57 @@
+# -----------------------------
+# Environment Variables
+# -----------------------------
+.env
+.env.*
+!.env.example
+
+# -----------------------------
+# Dependencies
+# -----------------------------
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# -----------------------------
+# Build Output
+# -----------------------------
+dist/
+build/
+out-tsc/
+.angular/
+
+# -----------------------------
+# Logs
+# -----------------------------
+npm-debug.log*
+yarn-error.log*
+*.log
+
+# -----------------------------
+# Coverage
+# -----------------------------
+coverage/
+
+# -----------------------------
+# IDE / Editor Files
+# -----------------------------
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+.idea/
+*.sublime-workspace
+
+# -----------------------------
+# System Files
+# -----------------------------
+.DS_Store
+Thumbs.db
+
+# -----------------------------
+# Temporary Files
+# -----------------------------
+tmp/
+.cache/
