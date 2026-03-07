@@ -2,21 +2,28 @@
 
 <h2 class="title">Product Management</h2>
 
-<div class="form-card">
+<div *ngIf="error" class="error-message">
+⚠️ {{error}}
+</div>
 
+<div class="form-card">
+  <h3>➕ Add New Product</h3>
 <form>
 
 <div class="form-group">
-<input type="text" placeholder="Product Name"
+<label>Product Name</label>
+<input type="text" placeholder="Enter product name"
 [(ngModel)]="product.name" name="name">
 </div>
 
 <div class="form-group">
-<input type="number" placeholder="Price"
+<label>Price (₹)</label>
+<input type="number" placeholder="Enter price"
 [(ngModel)]="product.price" name="price">
 </div>
 
 <div class="form-group">
+<label>Category</label>
 <select [(ngModel)]="product.category" name="category">
 <option value="">Select Category</option>
 <option *ngFor="let c of categories" [value]="c">
@@ -26,6 +33,7 @@
 </div>
 
 <div class="form-group">
+<label>Status</label>
 <select [(ngModel)]="product.status" name="status">
 <option value="">Select Status</option>
 <option *ngFor="let s of statusList" [value]="s">
@@ -34,15 +42,20 @@
 </select>
 </div>
 
-<button class="save-btn" (click)="saveProduct()">Save Product</button>
+<button class="save-btn" (click)="saveProduct()">💾 Save Product</button>
 
 </form>
 
 </div>
-
 <div class="table-card">
 
-<table>
+<!-- LOADING -->
+<div *ngIf="loading" class="loading">
+⏳ Loading products...
+</div>
+
+<!-- TABLE -->
+<table *ngIf="!loading && products.length > 0">
 
 <thead>
 <tr>
@@ -59,20 +72,21 @@
 
 <tr *ngFor="let p of products">
 
-<td>{{p.id}}</td>
+<td>#{{p.id}}</td>
 <td>{{p.name}}</td>
 <td>₹ {{p.price}}</td>
 <td>{{p.category}}</td>
 
 <td>
-<span class="status" [ngClass]="p.status">
+<span class="status"
+[ngClass]="p.status === 'Available' ? 'Available' : 'Out-of-Stock'">
 {{p.status}}
 </span>
 </td>
 
 <td>
 <button class="delete-btn" (click)="deleteProduct(p.id)">
-Delete
+🗑️ Delete
 </button>
 </td>
 
@@ -82,6 +96,13 @@ Delete
 
 </table>
 
+<!-- EMPTY STATE -->
+<div *ngIf="!loading && products.length === 0" class="empty-state">
+<div class="empty-state-icon">📦</div>
+<p>No products found. Add your first product above!</p>
 </div>
 
 </div>
+
+</div>
+

@@ -13,9 +13,11 @@ import { ProductService } from '../services/product-service';
 export class Product implements OnInit {
   products: any = [];
   product: any = {};
+  loading: boolean = false;
+  error: string = '';
 
   categories = ['Electronics', 'Fashion', 'Furniture'];
-  statusList = ['Avaiable', 'Out of Stock'];
+  statusList = ['Available', 'Out of Stock'];
 
   constructor(
     private http: HttpClient,
@@ -27,21 +29,42 @@ export class Product implements OnInit {
   }
 
   loadProducts() {
-    this.service.getProducts().subscribe((res: any) => {
-      this.products = res;
+    this.loading = true;
+
+    this.service.getProducts().subscribe({
+      next: (res: any) => {
+        this.products = res;
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error(err);
+        this.loading = false;
+      },
     });
   }
 
   saveProduct() {
-    this.service.addProducts(this.product).subscribe(() => {
-      this.product = {};
-      this.loadProducts();
+    this.service.addProducts(this.product).subscribe({
+      next: () => {
+        this.product = {};
+        this.loadProducts();
+      },
+      error: (err) => {
+        console.error('Error saving product:', err);
+        this.error = 'Failed to save product.';
+      },
     });
   }
 
   deleteProduct(id: any) {
-    this.service.deleteProduct(id).subscribe(() => {
-      this.loadProducts();
+    this.service.deleteProduct(id).subscribe({
+      next: () => {
+        this.loadProducts();
+      },
+      error: (err) => {
+        console.error('Error deleting product:', err);
+        this.error = 'Failed to delete product.';
+      },
     });
   }
 }
