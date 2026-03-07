@@ -1,12 +1,17 @@
 <nav class="navbar">
-  <a routerLink="/">Home</a>
-  <a routerLink="/products">Products</a>
-  <a routerLink="/add-product">Add Product</a>
-  <a routerLink="/about">About</a>
+  <div class="navbar-brand">
+    <span class="brand-icon">🛒</span>
+    <span class="brand-text">Product Manager</span>
+  </div>
+  <div class="navbar-links">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">🏠 Home</a>
+    <a routerLink="/products" routerLinkActive="active">📦 Products</a>
+    <a routerLink="/add-product" routerLinkActive="active">➕ Add Product</a>
+    <a routerLink="/about" routerLinkActive="active">ℹ️ About</a>
+  </div>
 </nav>
 
-<hr>
+<div class="content-wrapper">
+  <router-outlet />
+</div>
 
-<app-product></app-product>
-
-<router-outlet />

@@ -1,0 +1,197 @@
+.dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.main-title {
+  text-align: center;
+  font-size: 2.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.dashboard {
+  display: flex;
+  gap: 25px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  border: none;
+  padding: 30px 25px;
+  border-radius: 16px;
+  width: 300px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.card-products {
+  background: linear-gradient(135deg, #fff 0%, #e8f4fd 100%);
+}
+
+.card-products::before {
+  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.card-add {
+  background: linear-gradient(135deg, #fff 0%, #e8fde8 100%);
+}
+
+.card-add::before {
+  background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.card-about {
+  background: linear-gradient(135deg, #fff 0%, #fef5e8 100%);
+}
+
+.card-about::before {
+  background: linear-gradient(90deg, #fa709a 0%, #fee140 100%);
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.card h3 {
+  color: #333;
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+}
+
+.card p {
+  color: #666;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.card a {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.card-products a {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.card-products a:hover {
+  box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+}
+
+.card-add a {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.card-add a:hover {
+  box-shadow: 0 5px 15px rgba(67, 233, 123, 0.4);
+}
+
+.card-about a {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.card-about a:hover {
+  box-shadow: 0 5px 15px rgba(250, 112, 154, 0.4);
+}
+
+.info {
+  margin-top: 50px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.info-title {
+  color: white;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.info-content p {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+.highlight {
+  color: #fee140;
+  font-weight: 600;
+}
+
+.tech-stack {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+  flex-wrap: wrap;
+}
+
+.tech-badge {
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.angular {
+  background: #dd0031;
+  color: white;
+}
+
+.node {
+  background: #339933;
+  color: white;
+}
+
+.database {
+  background: #336791;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .card {
+    width: 100%;
+    max-width: 350px;
+  }
+  
+  .main-title {
+    font-size: 1.8rem;
+  }
+}
+
