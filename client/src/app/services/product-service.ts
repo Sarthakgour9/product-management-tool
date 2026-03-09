@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
-export class ProductService {
+export class ProductService {                     //API communication layer
   api = 'http://localhost:3000/api/products';
 
   constructor(private http: HttpClient) {}
@@ -16,7 +16,7 @@ export class ProductService {
   }
   updateProduct(id: any, data: any) {
     return this.http.put(`${this.api}/${id}`, data);
-  }
+  } 
   deleteProduct(id: any) {
     return this.http.delete(`${this.api}/${id}`);
   }
