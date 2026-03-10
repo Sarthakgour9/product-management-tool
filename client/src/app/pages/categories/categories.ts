@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ProductService } from '../../services/product-service';
@@ -31,22 +31,28 @@ export class Categories implements OnInit {
   categories: CategoryData[] = [];
   categoryList = ['Electronics', 'Clothing', 'Books', 'Food'];
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.loadProducts();
   }
 
   loadProducts() {
+    this.loading = true;
     this.productService.getProducts().subscribe({
       next: (data: any) => {
         this.products = data;
         this.calculateStatistics();
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         this.error = 'Failed to load products';
         this.loading = false;
+        this.cdr.detectChanges();
       }
     });
   }
