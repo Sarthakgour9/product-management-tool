@@ -1,108 +1,159 @@
-<div class="container">
+<div class="product-container">
+  <h1 class="page-title">📦 Product Management</h1>
 
-<h2 class="title">Product Management</h2>
+  <!-- Error Message -->
+  <div *ngIf="error" class="error-message">
+    ⚠️ {{error}}
+  </div>
 
-<div *ngIf="error" class="error-message">
-⚠️ {{error}}
-</div>
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading">
+    <div class="loading-spinner"></div>
+    <p>Loading products...</p>
+  </div>
 
-<div class="form-card">
-  <h3>➕ Add New Product</h3>
-<form>
+  <!-- Main Content -->
+  <div *ngIf="!loading" class="main-content">
+    
+    <!-- Stats Row -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-icon">📦</div>
+        <div class="stat-info">
+          <span class="stat-value">{{products.length}}</span>
+          <span class="stat-label">Total Products</span>
+        </div>
+      </div>
+      
+      <div class="stat-card available">
+        <div class="stat-icon">✅</div>
+        <div class="stat-info">
+          <span class="stat-value">{{getAvailableCount()}}</span>
+          <span class="stat-label">Available</span>
+        </div>
+      </div>
+      
+      <div class="stat-card out-of-stock">
+        <div class="stat-icon">❌</div>
+        <div class="stat-info">
+          <span class="stat-value">{{getOutOfStockCount()}}</span>
+          <span class="stat-label">Out of Stock</span>
+        </div>
+      </div>
+      
+      <div class="stat-card categories">
+        <div class="stat-icon">📂</div>
+        <div class="stat-info">
+          <span class="stat-value">{{getUniqueCategories()}}</span>
+          <span class="stat-label">Categories</span>
+        </div>
+      </div>
+    </div>
 
-<div class="form-group">
-<label>Product Name</label>
-<input type="text" placeholder="Enter product name"
-[(ngModel)]="product.name" name="name">
-</div>
+    <!-- Content Grid -->
+    <div class="content-grid">
+      
+      <!-- Add Product Card -->
+      <div class="card form-section">
+        <div class="card-header">
+          <h2>➕ Add New Product</h2>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Product Name</label>
+                <input type="text" placeholder="Enter product name"
+                [(ngModel)]="product.name" name="name">
+              </div>
+              
+              <div class="form-group">
+                <label>Price (₹)</label>
+                <input type="number" placeholder="Enter price"
+                [(ngModel)]="product.price" name="price">
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label>Category</label>
+                <select [(ngModel)]="product.category" name="category">
+                  <option value="">Select Category</option>
+                  <option *ngFor="let c of categories" [value]="c">
+                    {{c}}
+                  </option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label>Status</label>
+                <select [(ngModel)]="product.status" name="status">
+                  <option value="">Select Status</option>
+                  <option *ngFor="let s of statusList" [value]="s">
+                    {{s}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            
+            <button class="save-btn" (click)="saveProduct()">
+              💾 Save Product
+            </button>
+          </form>
+        </div>
+      </div>
 
-<div class="form-group">
-<label>Price (₹)</label>
-<input type="number" placeholder="Enter price"
-[(ngModel)]="product.price" name="price">
-</div>
-
-<div class="form-group">
-<label>Category</label>
-<select [(ngModel)]="product.category" name="category">
-<option value="">Select Category</option>
-<option *ngFor="let c of categories" [value]="c">
-{{c}}
-</option>
-</select>
-</div>
-
-<div class="form-group">
-<label>Status</label>
-<select [(ngModel)]="product.status" name="status">
-<option value="">Select Status</option>
-<option *ngFor="let s of statusList" [value]="s">
-{{s}}
-</option>
-</select>
-</div>
-
-<button class="save-btn" (click)="saveProduct()">💾 Save Product</button>
-
-</form>
-
-</div>
-<div class="table-card">
-
-<!-- LOADING -->
-<div *ngIf="loading" class="loading">
-⏳ Loading products...
-</div>
-
-<!-- TABLE -->
-<table *ngIf="!loading && products.length > 0">
-
-<thead>
-<tr>
-<th>ID</th>
-<th>Name</th>
-<th>Price</th>
-<th>Category</th>
-<th>Status</th>
-<th>Action</th>
-</tr>
-</thead>
-
-<tbody>
-
-<tr *ngFor="let p of products">
-
-<td>#{{p.id}}</td>
-<td>{{p.name}}</td>
-<td>₹ {{p.price}}</td>
-<td>{{p.category}}</td>
-
-<td>
-<span class="status"
-[ngClass]="p.status === 'Available' ? 'Available' : 'Out-of-Stock'">
-{{p.status}}
-</span>
-</td>
-
-<td>
-<button class="delete-btn" (click)="deleteProduct(p.id)">
-🗑️ Delete
-</button>
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-<!-- EMPTY STATE -->
-<div *ngIf="!loading && products.length === 0" class="empty-state">
-<div class="empty-state-icon">📦</div>
-<p>No products found. Add your first product above!</p>
-</div>
-
-</div>
-
+      <!-- Products Table Card -->
+      <div class="card table-section">
+        <div class="card-header">
+          <h2>📋 Product List</h2>
+        </div>
+        <div class="card-body">
+          <!-- Table -->
+          <div class="table-wrapper" *ngIf="products.length > 0">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Category</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let p of products">
+                  <td>#{{p.id}}</td>
+                  <td>{{p.name}}</td>
+                  <td>₹ {{p.price}}</td>
+                  <td>{{p.category}}</td>
+                  <td>
+                    <span class="status-badge" 
+                          [class.available]="p.status === 'Available'" 
+                          [class.out-of-stock]="p.status === 'Out-of-Stock'">
+                      {{p.status}}
+                    </span>
+                  </td>
+                  <td>
+                    <button class="delete-btn" (click)="deleteProduct(p.id)">
+                      🗑️ Delete
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <!-- Empty State -->
+          <div *ngIf="products.length === 0" class="empty-state">
+            <div class="empty-icon">📦</div>
+            <h3>No Products Found</h3>
+            <p>Add your first product using the form on the left!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
