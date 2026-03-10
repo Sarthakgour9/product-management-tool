@@ -73,4 +73,18 @@ export class Product implements OnInit {
       },
     });
   }
+
+  // Helper methods for stats
+  getAvailableCount(): number {
+    return this.products.filter((p: any) => p.status === 'Available').length;
+  }
+
+  getOutOfStockCount(): number {
+    return this.products.filter((p: any) => p.status === 'Out-of-Stock').length;
+  }
+
+  getUniqueCategories(): number {
+    const categories = new Set(this.products.map((p: any) => p.category));
+    return categories.size;
+  }
 }
