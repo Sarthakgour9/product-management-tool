@@ -1,0 +1,107 @@
+<div class="categories-container">
+  <h1 class="main-title">📊 Product Categories & Statistics</h1>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading">
+    ⏳ Loading statistics...
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="error-message">
+    ⚠️ {{error}}
+  </div>
+
+  <!-- Statistics Overview -->
+  <div *ngIf="!loading && !error" class="stats-overview">
+    <div class="stat-card total">
+      <div class="stat-icon">📦</div>
+      <div class="stat-info">
+        <span class="stat-value">{{totalProducts}}</span>
+        <span class="stat-label">Total Products</span>
+      </div>
+    </div>
+
+    <div class="stat-card available">
+      <div class="stat-icon">✅</div>
+      <div class="stat-info">
+        <span class="stat-value">{{totalAvailable}}</span>
+        <span class="stat-label">Available</span>
+      </div>
+    </div>
+
+    <div class="stat-card out-of-stock">
+      <div class="stat-icon">❌</div>
+      <div class="stat-info">
+        <span class="stat-value">{{totalOutOfStock}}</span>
+        <span class="stat-label">Out of Stock</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category Cards -->
+  <div *ngIf="!loading && !error" class="categories-grid">
+    <div *ngFor="let cat of categories" class="category-card">
+      <div class="category-header">
+        <span class="category-icon">
+          {{cat.name === 'Electronics' ? '💻' : cat.name === 'Clothing' ? '👕' : cat.name === 'Books' ? '📚' : '🍔'}}
+        </span>
+        <h3 class="category-name">{{cat.name}}</h3>
+      </div>
+
+      <div class="category-stats">
+        <div class="category-total">
+          <span class="big-number">{{cat.count}}</span>
+          <span class="stat-sublabel">products</span>
+        </div>
+
+        <div class="category-breakdown">
+          <div class="breakdown-item available">
+            <span class="breakdown-icon">✅</span>
+            <span class="breakdown-count">{{cat.available}}</span>
+            <span class="breakdown-label">Available</span>
+          </div>
+          <div class="breakdown-item out">
+            <span class="breakdown-icon">❌</span>
+            <span class="breakdown-count">{{cat.outOfStock}}</span>
+            <span class="breakdown-label">Out of Stock</span>
+          </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+          <div class="progress-fill available" 
+               [style.width.%]="getCategoryPercentage(cat.count)">
+          </div>
+        </div>
+        <span class="percentage-label">{{getCategoryPercentage(cat.count)}}% of all products</span>
+      </div>
+
+      <!-- Products List -->
+      <div *ngIf="cat.count > 0" class="products-in-category">
+        <h4>Products in {{cat.name}}:</h4>
+        <ul>
+          <li *ngFor="let product of getCategoryProducts(cat.name)">
+            <span class="product-name">{{product.name}}</span>
+            <span class="product-price">₹{{product.price}}</span>
+            <span class="product-status" [class]="product.status === 'Available' ? 'status-available' : 'status-out'">
+              {{product.status}}
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <div *ngIf="cat.count === 0" class="empty-category">
+        <p>No products in this category</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!loading && !error && totalProducts === 0" class="empty-state">
+    <div class="empty-state-icon">📊</div>
+    <h3>No Products Yet</h3>
+    <p>Start by adding products to see statistics here.</p>
+    <a routerLink="/products" class="btn-primary">Go to Products →</a>
+  </div>
+</div>
+

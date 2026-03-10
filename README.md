@@ -58,6 +58,7 @@ product-crud-app
 * Dropdown binding for product category
 * REST API integration
 * Cloud database using NeonDB
+* **Product Categories & Statistics page** - View products grouped by category with detailed breakdowns
 
 ---
 
@@ -72,6 +73,18 @@ CREATE TABLE products (
  status VARCHAR(50)
 );
 ```
+
+---
+
+## 🛣 Application Routes
+
+| Route           | Component          | Description                      |
+| --------------- | ----------------- | -------------------------------- |
+| `/`             | Home              | Dashboard with quick links       |
+| `/products`     | Product           | Product list with add form       |
+| `/categories`   | Categories        | Statistics & category breakdown |
+| `/about`        | About             | About the application            |
+| `/add-product`  | AddProduct       | Standalone add product form      |
 
 ---
 
