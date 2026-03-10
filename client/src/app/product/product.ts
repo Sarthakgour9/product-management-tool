@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../services/product-service';
@@ -16,12 +16,13 @@ export class Product implements OnInit {
   loading: boolean = false;
   error: string = '';
 
-  categories = ['Electronics', 'Fashion', 'Furniture'];
-  statusList = ['Available', 'Out of Stock'];
+  categories = ['Electronics', 'Clothing', 'Books', 'Food'];
+  statusList = ['Available', 'Out-of-Stock'];
 
   constructor(
     private http: HttpClient,
     private service: ProductService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -35,10 +36,13 @@ export class Product implements OnInit {
       next: (res: any) => {
         this.products = res;
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error(err);
+        this.error = 'Failed to load products';
         this.loading = false;
+        this.cdr.detectChanges();
       },
     });
   }
@@ -52,6 +56,7 @@ export class Product implements OnInit {
       error: (err) => {
         console.error('Error saving product:', err);
         this.error = 'Failed to save product.';
+        this.cdr.detectChanges();
       },
     });
   }
@@ -64,6 +69,7 @@ export class Product implements OnInit {
       error: (err) => {
         console.error('Error deleting product:', err);
         this.error = 'Failed to delete product.';
+        this.cdr.detectChanges();
       },
     });
   }
