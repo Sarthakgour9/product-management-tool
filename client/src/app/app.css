@@ -8,6 +8,12 @@
 body {
   background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
   min-height: 100vh;
+  transition: background 0.3s ease;
+}
+
+/* Dark Mode Styles - Simplified to avoid conflicts */
+body.dark-mode {
+  background: linear-gradient(135deg, #0d1117 0%, #161b22 100%) !important;
 }
 
 /* Navbar Styles */
@@ -21,6 +27,12 @@ body {
   position: sticky;
   top: 0;
   z-index: 1000;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar.dark-mode {
+  background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .navbar-brand {
@@ -38,11 +50,13 @@ body {
   font-weight: 700;
   color: white;
   letter-spacing: 0.5px;
+  transition: color 0.3s ease;
 }
 
 .navbar-links {
   display: flex;
   gap: 8px;
+  align-items: center;
 }
 
 .navbar-links a {
@@ -68,11 +82,43 @@ body {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+/* Theme Toggle Button */
+.theme-toggle {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  margin-left: 10px;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
 /* Content Wrapper */
 .content-wrapper {
   padding: 20px;
   max-width: 1400px;
   margin: 0 auto;
+  transition: background 0.3s ease;
+  min-height: calc(100vh - 70px);
+}
+
+.content-wrapper.dark-mode {
+  background: transparent;
 }
 
 /* Responsive Navbar */
@@ -96,5 +142,32 @@ body {
   .brand-text {
     font-size: 1.2rem;
   }
+}
+
+/* Global Dark Mode - Simplified to work with styles.css */
+body.dark-mode .content-wrapper {
+  background: transparent !important;
+}
+
+body.dark-mode .stat-card {
+  background: #161b22 !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.dark-mode .stat-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.dark-mode .stat-value {
+  color: #f0f6fc !important;
+}
+
+body.dark-mode .stat-label {
+  color: #8b949e !important;
+}
+
+/* Override any white backgrounds */
+body.dark-mode * {
+  border-color: #30363d !important;
 }
 

@@ -8,8 +8,27 @@
 html, body {
   height: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+  background: #f5f7fa;
   min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode - Full Page - Fixed */
+body.dark-mode {
+  background-color: #0d1117 !important;
+  color: #e6edf3;
+}
+
+html.dark-mode, 
+html.dark-mode body {
+  background-color: #0d1117 !important;
+}
+
+/* Ensure Angular app root also has proper background */
+body.dark-mode app-root {
+  display: block;
+  min-height: 100vh;
+  background-color: #0d1117;
 }
 
 /* Smooth scrolling */
@@ -36,9 +55,388 @@ html {
   background: linear-gradient(135deg, #5a6fd6 0%, #6a4190 100%);
 }
 
+/* Dark mode scrollbar */
+body.dark-mode ::-webkit-scrollbar-track {
+  background: #161b22;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+  background: #30363d;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+  background: #484f58;
+}
+
 /* Selection color */
 ::selection {
   background: rgba(102, 126, 234, 0.3);
   color: #333;
+}
+
+body.dark-mode ::selection {
+  background: rgba(88, 166, 255, 0.3);
+  color: #f0f6fc;
+}
+
+/* Dark Mode Universal Overrides with proper backgrounds */
+body.dark-mode .container,
+body.dark-mode .wrapper,
+body.dark-mode .main-container {
+  background-color: #0d1117 !important;
+}
+
+/* Force all sections to use dark backgrounds */
+body.dark-mode .dashboard-container,
+body.dark-mode .product-container,
+body.dark-mode .categories-container,
+body.dark-mode .about-container,
+body.dark-mode .add-product-container {
+  background-color: #0d1117 !important;
+}
+
+/* Cards - Universal dark style */
+body.dark-mode .card,
+body.dark-mode .stat-card,
+body.dark-mode .category-card,
+body.dark-mode .about-card,
+body.dark-mode .add-product-card,
+body.dark-mode .recent-section,
+body.dark-mode .category-section,
+body.dark-mode .empty-state,
+body.dark-mode .products-in-category li,
+body.dark-mode .breakdown-item,
+body.dark-mode .flow-diagram,
+body.dark-mode .info {
+  background-color: #161b22 !important;
+  border: 1px solid #30363d !important;
+}
+
+/* Headings */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+  color: #f0f6fc !important;
+}
+
+/* Special heading with gradient for main titles */
+body.dark-mode .main-title,
+body.dark-mode .page-title,
+body.dark-mode .hero-title {
+  background: linear-gradient(135deg, #58a6ff 0%, #79c0ff 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: #58a6ff !important;
+}
+
+/* Paragraphs and text */
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode li,
+body.dark-mode td,
+body.dark-mode th,
+body.dark-mode label,
+body.dark-mode .stat-label,
+body.dark-mode .category-count,
+body.dark-mode .stat-sublabel {
+  color: #8b949e !important;
+}
+
+/* Values and numbers */
+body.dark-mode .stat-value,
+body.dark-mode .big-number,
+body.dark-mode .product-price {
+  color: #f0f6fc !important;
+}
+
+/* Links */
+body.dark-mode a {
+  color: #58a6ff !important;
+}
+
+/* Form inputs */
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+  background-color: #0d1117 !important;
+  border-color: #30363d !important;
+  color: #f0f6fc !important;
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+  color: #6e7681 !important;
+}
+
+/* Tables */
+body.dark-mode table {
+  border-color: #30363d !important;
+}
+
+body.dark-mode th,
+body.dark-mode td {
+  border-color: #30363d !important;
+  color: #c9d1d9 !important;
+}
+
+body.dark-mode thead tr {
+  background-color: #161b22 !important;
+}
+
+body.dark-mode th {
+  color: #f0f6fc !important;
+}
+
+/* Status badges */
+body.dark-mode .status-badge,
+body.dark-mode .status-available,
+body.dark-mode .status-out,
+body.dark-mode .product-status {
+  background-color: #21262d !important;
+  color: #8b949e !important;
+}
+
+/* Specific status colors */
+body.dark-mode .status-badge.available,
+body.dark-mode .status-available,
+body.dark-mode .product-status.status-available {
+  background-color: rgba(35, 134, 54, 0.4) !important;
+  color: #7ee787 !important;
+}
+
+body.dark-mode .status-badge.out-of-stock,
+body.dark-mode .status-out,
+body.dark-mode .product-status.status-out {
+  background-color: rgba(218, 54, 51, 0.4) !important;
+  color: #f85149 !important;
+}
+
+/* Progress bars */
+body.dark-mode .progress-bar {
+  background-color: #21262d !important;
+}
+
+/* Buttons */
+body.dark-mode .btn-primary,
+body.dark-mode .btn-add,
+body.dark-mode .save-btn,
+body.dark-mode .submit-btn,
+body.dark-mode .delete-btn {
+  background-color: #238636 !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode .delete-btn {
+  background-color: #da3633 !important;
+}
+
+/* Error and success messages */
+body.dark-mode .error-message {
+  background-color: rgba(218, 54, 51, 0.2) !important;
+  border: 1px solid #da3633 !important;
+  color: #f85149 !important;
+}
+
+body.dark-mode .success-message {
+  background-color: rgba(35, 134, 54, 0.2) !important;
+  border: 1px solid #238636 !important;
+  color: #7ee787 !important;
+}
+
+/* Loading spinner */
+body.dark-mode .loading-spinner {
+  border-color: #30363d !important;
+  border-top-color: #58a6ff !important;
+}
+
+/* Category items */
+body.dark-mode .category-item {
+  background-color: #161b22 !important;
+  border: 1px solid #30363d !important;
+}
+
+/* Flow diagram */
+body.dark-mode .flow-icon {
+  background-color: #21262d !important;
+  border: 1px solid #30363d !important;
+}
+
+/* Tech badges */
+body.dark-mode .tech-badge,
+body.dark-mode .objective-tag {
+  background-color: #21262d !important;
+  color: #f0f6fc !important;
+}
+
+/* Section titles */
+body.dark-mode .section-title {
+  color: #f0f6fc !important;
+}
+
+/* Empty states */
+body.dark-mode .empty-recent,
+body.dark-mode .empty-category {
+  color: #6e7681 !important;
+}
+
+/* Navbar active state */
+body.dark-mode .navbar-links a.active {
+  background-color: #21262d !important;
+  color: #58a6ff !important;
+}
+
+/* Border overrides */
+body.dark-mode * {
+  border-color: #30363d !important;
+}
+
+/* Remove borders where not needed */
+body.dark-mode .card,
+body.dark-mode .stat-card {
+  border: none !important;
+}
+
+/* Info section special handling */
+body.dark-mode .info {
+  background: linear-gradient(135deg, #161b22 0%, #0d1117 100%) !important;
+  border: 1px solid #30363d !important;
+}
+
+body.dark-mode .info-title {
+  color: #f0f6fc !important;
+}
+
+body.dark-mode .info-content p {
+  color: #8b949e !important;
+}
+
+/* Highlight */
+body.dark-mode .highlight {
+  color: #79c0ff !important;
+}
+
+/* Card gradient backgrounds for dark mode */
+body.dark-mode .card-products,
+body.dark-mode .card-add,
+body.dark-mode .card-categories,
+body.dark-mode .card-about {
+  background: linear-gradient(135deg, #161b22 0%, #0d1117 100%) !important;
+}
+
+/* About hero section dark mode */
+body.dark-mode .about-hero {
+  background: linear-gradient(135deg, #161b22 0%, #0d1117 100%) !important;
+}
+
+/* Card hover effects for dark mode */
+body.dark-mode .stat-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.dark-mode .category-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.dark-mode .about-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Additional dark mode fixes for specific elements */
+body.dark-mode .form-section .card,
+body.dark-mode .table-section .card {
+  background-color: #161b22 !important;
+}
+
+body.dark-mode .card-body {
+  background-color: #161b22 !important;
+}
+
+body.dark-mode .form-row,
+body.dark-mode .form-group {
+  background-color: transparent !important;
+}
+
+/* Stats overview dark mode */
+body.dark-mode .stats-overview {
+  background-color: transparent !important;
+}
+
+/* Category header dark mode */
+body.dark-mode .category-header {
+  border-bottom-color: #30363d !important;
+}
+
+/* Products in category dark mode */
+body.dark-mode .products-in-category {
+  border-top-color: #30363d !important;
+}
+
+/* Tech list dark mode */
+body.dark-mode .tech-list li {
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Feature list dark mode */
+body.dark-mode .feature-list li {
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Flow diagram dark mode */
+body.dark-mode .flow-diagram {
+  background: rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Empty state dark mode */
+body.dark-mode .empty-state {
+  background: linear-gradient(135deg, #161b22 0%, #0d1117 100%) !important;
+}
+
+/* Recent table dark mode */
+body.dark-mode .recent-table th {
+  background: linear-gradient(135deg, #21262d 0%, #161b22 100%) !important;
+}
+
+body.dark-mode .recent-table tbody tr:hover {
+  background-color: #21262d !important;
+}
+
+/* Progress bar dark mode */
+body.dark-mode .progress-fill {
+  background: linear-gradient(90deg, #238636 0%, #2ea043 100%) !important;
+}
+
+/* Button hover states for dark mode */
+body.dark-mode .btn-primary:hover,
+body.dark-mode .btn-add:hover,
+body.dark-mode .save-btn:hover,
+body.dark-mode .submit-btn:hover {
+  box-shadow: 0 10px 25px rgba(35, 134, 54, 0.4) !important;
+}
+
+body.dark-mode .delete-btn:hover {
+  box-shadow: 0 5px 15px rgba(218, 54, 51, 0.4) !important;
+}
+
+/* Card icons dark mode */
+body.dark-mode .card-icon {
+  background: linear-gradient(135deg, #21262d 0%, #30363d 100%) !important;
+}
+
+/* Category icon dark mode */
+body.dark-mode .category-icon {
+  opacity: 0.9;
+}
+
+/* Footer dark mode */
+body.dark-mode .about-footer {
+  color: #6e7681 !important;
+}
+
+/* View all link dark mode */
+body.dark-mode .view-all-link:hover {
+  color: #79c0ff !important;
 }
 

@@ -392,3 +392,121 @@ tbody tr:hover {
   }
 }
 
+/* Dark Mode Styles */
+body.dark-mode .product-container {
+  background-color: #0d1117 !important;
+}
+
+body.dark-mode .page-title {
+  background: linear-gradient(135deg, #58a6ff 0%, #79c0ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+body.dark-mode .error-message {
+  background: linear-gradient(135deg, #da3633 0%, #f85149 100%) !important;
+}
+
+body.dark-mode .loading p {
+  color: #8b949e !important;
+}
+
+body.dark-mode .loading-spinner {
+  border-color: #30363d !important;
+  border-top-color: #58a6ff !important;
+}
+
+body.dark-mode .stat-card {
+  background: #161b22 !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.dark-mode .stat-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.dark-mode .stat-value {
+  color: #f0f6fc !important;
+}
+
+body.dark-mode .stat-label {
+  color: #8b949e !important;
+}
+
+body.dark-mode .card {
+  background: #161b22 !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.dark-mode .card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.dark-mode .card-header {
+  border-bottom: 1px solid #30363d !important;
+}
+
+body.dark-mode .card-header h2 {
+  color: #f0f6fc !important;
+}
+
+body.dark-mode .form-group label {
+  color: #8b949e !important;
+}
+
+body.dark-mode input,
+body.dark-mode select {
+  background: #0d1117 !important;
+  border-color: #30363d !important;
+  color: #f0f6fc !important;
+}
+
+body.dark-mode input:focus,
+body.dark-mode select:focus {
+  border-color: #58a6ff !important;
+  box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.2) !important;
+}
+
+body.dark-mode input::placeholder {
+  color: #6e7681 !important;
+}
+
+body.dark-mode table thead tr {
+  background: linear-gradient(135deg, #21262d 0%, #161b22 100%) !important;
+}
+
+body.dark-mode th {
+  color: #f0f6fc !important;
+}
+
+body.dark-mode td {
+  color: #c9d1d9 !important;
+  border-bottom: 1px solid #30363d !important;
+}
+
+body.dark-mode tbody tr:hover {
+  background: linear-gradient(135deg, #21262d 0%, #161b22 100%) !important;
+}
+
+body.dark-mode .status-badge.available {
+  background: linear-gradient(135deg, #238636 0%, #2ea043 100%) !important;
+  color: #7ee787 !important;
+}
+
+body.dark-mode .status-badge.out-of-stock {
+  background: linear-gradient(135deg, #da3633 0%, #f85149 100%) !important;
+  color: #ffa198 !important;
+}
+
+body.dark-mode .empty-state {
+  background: linear-gradient(135deg, #161b22 0%, #0d1117 100%) !important;
+}
+
+body.dark-mode .empty-state h3 {
+  color: #f0f6fc !important;
+}
+
+body.dark-mode .empty-state p {
+  color: #8b949e !important;
+}
+

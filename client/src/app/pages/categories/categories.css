@@ -330,3 +330,119 @@
   }
 }
 
+/* Dark Mode Styles */
+body.dark-mode .categories-container {
+  background-color: #0d1117 !important;
+}
+
+body.dark-mode .main-title {
+  color: #58a6ff !important;
+  text-shadow: 0 0 10px rgba(88, 166, 255, 0.5);
+}
+
+body.dark-mode .loading {
+  color: #8b949e !important;
+}
+
+body.dark-mode .error-message {
+  background-color: #da3633 !important;
+  color: #f0f6fc !important;
+}
+
+body.dark-mode .stat-card {
+  background: #161b22 !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.dark-mode .stat-value {
+  color: #f0f6fc !important;
+}
+
+body.dark-mode .stat-label {
+  color: #8b949e !important;
+}
+
+body.dark-mode .category-card {
+  background: #161b22 !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.dark-mode .category-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.dark-mode .category-header {
+  border-bottom: 2px solid #30363d !important;
+}
+
+body.dark-mode .category-name {
+  color: #f0f6fc !important;
+}
+
+body.dark-mode .big-number {
+  color: #7ee787 !important;
+}
+
+body.dark-mode .stat-sublabel {
+  color: #8b949e !important;
+}
+
+body.dark-mode .breakdown-item {
+  background: #21262d !important;
+}
+
+body.dark-mode .breakdown-label {
+  color: #8b949e !important;
+}
+
+body.dark-mode .percentage-label {
+  color: #8b949e !important;
+}
+
+body.dark-mode .progress-bar {
+  background: #30363d !important;
+}
+
+body.dark-mode .products-in-category {
+  border-top: 2px solid #30363d !important;
+}
+
+body.dark-mode .products-in-category h4 {
+  color: #f0f6fc !important;
+}
+
+body.dark-mode .products-in-category li {
+  background: #21262d !important;
+}
+
+body.dark-mode .product-name {
+  color: #f0f6fc !important;
+}
+
+body.dark-mode .status-available {
+  background: #238636 !important;
+  color: #7ee787 !important;
+}
+
+body.dark-mode .status-out {
+  background: #da3633 !important;
+  color: #ffa198 !important;
+}
+
+body.dark-mode .empty-category {
+  color: #6e7681 !important;
+}
+
+body.dark-mode .empty-state {
+  background: #161b22 !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.dark-mode .empty-state h3 {
+  color: #f0f6fc !important;
+}
+
+body.dark-mode .empty-state p {
+  color: #8b949e !important;
+}
+

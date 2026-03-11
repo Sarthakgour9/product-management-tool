@@ -1,0 +1,213 @@
+/* Add Product Container */
+.add-product-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 2.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+/* Form Card */
+.add-product-card {
+  background: white;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.add-product-card:hover {
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  color: #333;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 10px;
+  border: 2px solid #e0e0e0;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  background: white;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
+}
+
+.form-group input::placeholder {
+  color: #999;
+}
+
+/* Button */
+.submit-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 16px 40px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+}
+
+.submit-btn:active {
+  transform: translateY(-1px);
+}
+
+/* Success Message */
+.success-message {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  text-align: center;
+  font-weight: 500;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Error Message */
+.error-message {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Form Row */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .add-product-container {
+    padding: 20px 15px;
+  }
+  
+  .page-title {
+    font-size: 1.8rem;
+  }
+  
+  .add-product-card {
+    padding: 25px;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-group input,
+  .form-group select {
+    padding: 12px 15px;
+  }
+}
+
+/* Dark Mode Styles */
+body.dark-mode .add-product-container {
+  background-color: #0d1117 !important;
+}
+
+body.dark-mode .page-title {
+  background: linear-gradient(135deg, #58a6ff 0%, #79c0ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+body.dark-mode .add-product-card {
+  background: #161b22 !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.dark-mode .add-product-card:hover {
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.dark-mode .form-group label {
+  color: #f0f6fc !important;
+}
+
+body.dark-mode .form-group input,
+body.dark-mode .form-group select {
+  background: #0d1117 !important;
+  border-color: #30363d !important;
+  color: #f0f6fc !important;
+}
+
+body.dark-mode .form-group input:focus,
+body.dark-mode .form-group select:focus {
+  border-color: #58a6ff !important;
+  box-shadow: 0 0 0 4px rgba(88, 166, 255, 0.2) !important;
+}
+
+body.dark-mode .form-group input::placeholder {
+  color: #6e7681 !important;
+}
+
+body.dark-mode .submit-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+body.dark-mode .success-message {
+  background: linear-gradient(135deg, #238636 0%, #2ea043 100%) !important;
+}
+
+body.dark-mode .error-message {
+  background: linear-gradient(135deg, #da3633 0%, #f85149 100%) !important;
+}
+
