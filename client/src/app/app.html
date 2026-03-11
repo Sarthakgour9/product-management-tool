@@ -1,4 +1,4 @@
-<nav class="navbar">
+<nav class="navbar" [class.dark-mode]="darkMode()">
   <div class="navbar-brand">
     <span class="brand-icon">🛒</span>
     <span class="brand-text">Product Manager</span>
@@ -9,10 +9,13 @@
     <a routerLink="/categories" routerLinkActive="active">📊 Categories</a>
     <!-- <a routerLink="/add-product" routerLinkActive="active">➕ Add Product</a> -->
     <a routerLink="/about" routerLinkActive="active">ℹ️ About</a>
+    <button class="theme-toggle" (click)="toggleDarkMode()" [attr.aria-label]="darkMode() ? 'Switch to light mode' : 'Switch to dark mode'">
+      {{ darkMode() ? '☀️' : '🌙' }}
+    </button>
   </div>
 </nav>
 
-<div class="content-wrapper">
+<div class="content-wrapper" [class.dark-mode]="darkMode()">
   <router-outlet />
 </div>
 
