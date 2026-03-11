@@ -440,3 +440,25 @@ body.dark-mode .view-all-link:hover {
   color: #79c0ff !important;
 }
 
+/* List icons in dark mode */
+body.dark-mode .list-icon {
+  opacity: 0.8;
+}
+
+/* Ensure Angular router-outlet content has dark background */
+body.dark-mode router-outlet + * {
+  background-color: #0d1117 !important;
+  min-height: calc(100vh - 70px);
+}
+
+/* Force dark background on all route containers */
+body.dark-mode app-about,
+body.dark-mode app-home,
+body.dark-mode app-product,
+body.dark-mode app-categories,
+body.dark-mode app-add-product {
+  display: block;
+  background-color: #0d1117 !important;
+  min-height: calc(100vh - 70px);
+}
+
