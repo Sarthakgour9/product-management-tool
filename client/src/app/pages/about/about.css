@@ -1,8 +1,10 @@
+/* Add Product Container */
 .about-container {
   max-width: 1100px;
   margin: 0 auto;
   padding: 40px 25px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f7fa;
 }
 
 /* Hero Section */
@@ -455,74 +457,138 @@
   }
 }
 
-/* Dark Mode Styles */
-body.dark-mode .about-container {
+/* ============================================
+   DARK MODE STYLES - COMPREHENSIVE FIX
+   Using ::ng-deep for Angular view encapsulation
+   ============================================ */
+
+::ng-deep body.dark-mode .about-container {
   background-color: #0d1117 !important;
+  min-height: 100vh;
 }
 
-body.dark-mode .about-hero {
-  background: linear-gradient(135deg, #161b22 0%, #0d1117 100%) !important;
+::ng-deep body.dark-mode .about-hero {
+  background: linear-gradient(135deg, #1a2332 0%, #0d1117 100%) !important;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+  border: 1px solid #30363d !important;
 }
 
-body.dark-mode .about-card {
-  background: #161b22 !important;
+::ng-deep body.dark-mode .hero-title {
+  color: #f0f6fc !important;
+  text-shadow: none !important;
+}
+
+::ng-deep body.dark-mode .hero-subtitle {
+  color: #8b949e !important;
+}
+
+::ng-deep body.dark-mode .about-card {
+  background-color: #161b22 !important;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+  border: 1px solid #30363d !important;
 }
 
-body.dark-mode .about-card:hover {
+::ng-deep body.dark-mode .about-card:hover {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5) !important;
 }
 
-body.dark-mode .main-intro,
-body.dark-mode .purpose-card,
-body.dark-mode .features-card,
-body.dark-mode .tech-card,
-body.dark-mode .how-card,
-body.dark-mode .objective-card {
+::ng-deep body.dark-mode .main-intro {
   background: linear-gradient(135deg, #161b22 0%, #0d1117 100%) !important;
 }
 
-body.dark-mode .main-intro p,
-body.dark-mode .card-content p {
-  color: #8b949e !important;
+::ng-deep body.dark-mode .purpose-card {
+  background: linear-gradient(135deg, #161b22 0%, #0d1117 100%) !important;
 }
 
-body.dark-mode .card-header h2 {
+::ng-deep body.dark-mode .features-card {
+  background: linear-gradient(135deg, #161b22 0%, #0d1117 100%) !important;
+}
+
+::ng-deep body.dark-mode .tech-card {
+  background: linear-gradient(135deg, #161b22 0%, #0d1117 100%) !important;
+}
+
+::ng-deep body.dark-mode .how-card {
+  background: linear-gradient(135deg, #161b22 0%, #0d1117 100%) !important;
+}
+
+::ng-deep body.dark-mode .objective-card {
+  background: linear-gradient(135deg, #161b22 0%, #0d1117 100%) !important;
+}
+
+::ng-deep body.dark-mode .card-header h2 {
   color: #f0f6fc !important;
 }
 
-body.dark-mode .feature-list li {
-  color: #8b949e !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-}
-
-body.dark-mode .tech-list li {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-}
-
-body.dark-mode .tech-desc {
+::ng-deep body.dark-mode .card-icon {
+  background: linear-gradient(135deg, #30363d 0%, #21262d 100%) !important;
   color: #8b949e !important;
 }
 
-body.dark-mode .flow-diagram {
-  background: rgba(0, 0, 0, 0.3) !important;
-}
-
-body.dark-mode .flow-label {
+::ng-deep body.dark-mode .card-content p {
   color: #8b949e !important;
 }
 
-body.dark-mode .flow-description {
+::ng-deep body.dark-mode .feature-list li {
+  color: #8b949e !important;
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+::ng-deep body.dark-mode .list-icon {
+  opacity: 0.7;
+}
+
+::ng-deep body.dark-mode .tech-list li {
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+::ng-deep body.dark-mode .tech-badge {
+  background: linear-gradient(135deg, #30363d 0%, #21262d 100%) !important;
+  color: #f0f6fc !important;
+  border: 1px solid #484f58 !important;
+}
+
+::ng-deep body.dark-mode .tech-desc {
   color: #8b949e !important;
 }
 
-body.dark-mode .flow-icon {
+::ng-deep body.dark-mode .flow-diagram {
+  background: rgba(0, 0, 0, 0.4) !important;
+  border: 1px solid #30363d !important;
+}
+
+::ng-deep body.dark-mode .flow-step {
   background: #21262d !important;
+  padding: 15px;
+  border-radius: 12px;
+}
+
+::ng-deep body.dark-mode .flow-icon {
+  background: #30363d !important;
+  color: #8b949e !important;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
 }
 
-body.dark-mode .about-footer {
+::ng-deep body.dark-mode .flow-label {
+  color: #f0f6fc !important;
+}
+
+::ng-deep body.dark-mode .flow-arrow {
+  color: #58a6ff !important;
+}
+
+::ng-deep body.dark-mode .flow-description {
+  color: #8b949e !important;
+}
+
+::ng-deep body.dark-mode .objective-tag {
+  background: linear-gradient(135deg, #30363d 0%, #21262d 100%) !important;
+  color: #f0f6fc !important;
+  border: 1px solid #484f58 !important;
+}
+
+::ng-deep body.dark-mode .about-footer {
   color: #6e7681 !important;
+  border-top: 1px solid #30363d !important;
 }
 
