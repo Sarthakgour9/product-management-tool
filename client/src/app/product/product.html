@@ -56,7 +56,7 @@
       <!-- Add Product Card -->
       <div class="card form-section">
         <div class="card-header">
-          <h2>➕ Add New Product</h2>
+          <h2>{{ editingId ? '✏️ Edit Product' : '➕ Add New Product' }}</h2>
         </div>
         <div class="card-body">
           <form>
@@ -96,9 +96,14 @@
               </div>
             </div>
             
-            <button class="save-btn" (click)="saveProduct()">
-              💾 Save Product
-            </button>
+            <div class="form-buttons">
+              <button class="save-btn" (click)="saveOrUpdateProduct()">
+                {{ editingId ? '💾 Update Product' : '💾 Save Product' }}
+              </button>
+              <button *ngIf="editingId" class="cancel-btn" (click)="cancelEdit()" type="button">
+                Cancel
+              </button>
+            </div>
           </form>
         </div>
       </div>
@@ -136,6 +141,9 @@
                     </span>
                   </td>
                   <td>
+                    <button class="edit-btn" (click)="editProduct(p.id.toString())">
+                      ✏️ Edit
+                    </button>
                     <button class="delete-btn" (click)="deleteProduct(p.id)">
                       🗑️ Delete
                     </button>

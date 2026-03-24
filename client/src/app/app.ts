@@ -17,7 +17,7 @@ export class App implements OnInit {
     // Effect to update CSS class and localStorage when darkMode changes
     effect(() => {
       const isDark = this.darkMode();
-      if (typeof document !== 'undefined') {
+      if (typeof document !== 'undefined' && typeof localStorage !== 'undefined') {
         document.body.classList.toggle('dark-mode', isDark);
         localStorage.setItem('darkMode', isDark ? 'true' : 'false');
       }
@@ -25,14 +25,16 @@ export class App implements OnInit {
   }
 
   ngOnInit() {
-    // Check localStorage for saved preference
-    const savedPreference = localStorage.getItem('darkMode');
-    if (savedPreference) {
-      this.darkMode.set(savedPreference === 'true');
-    } else {
-      // Check system preference
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      this.darkMode.set(prefersDark);
+    // Check localStorage for saved preference (only in browser)
+    if (typeof localStorage !== 'undefined') {
+      const savedPreference = localStorage.getItem('darkMode');
+      if (savedPreference) {
+        this.darkMode.set(savedPreference === 'true');
+      } else {
+        // Check system preference
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        this.darkMode.set(prefersDark);
+      }
     }
   }
 

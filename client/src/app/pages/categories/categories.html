@@ -43,7 +43,7 @@
     <div *ngFor="let cat of categories" class="category-card">
       <div class="category-header">
         <span class="category-icon">
-          {{cat.name === 'Electronics' ? '💻' : cat.name === 'Clothing' ? '👕' : cat.name === 'Books' ? '📚' : '🍔'}}
+          {{getCategoryIcon(cat.name)}}
         </span>
         <h3 class="category-name">{{cat.name}}</h3>
       </div>

@@ -11,12 +11,27 @@ import { ProductService } from '../services/product-service';
   styleUrl: './product.css',
 })
 export class Product implements OnInit {
-  products: any = [];
+  products: any[] = [];
   product: any = {};
+  editingId: string | null = null;
   loading: boolean = false;
   error: string = '';
 
-  categories = ['Electronics', 'Clothing', 'Books', 'Food'];
+  categories = [
+    'Electronics',
+    'Clothing',
+    'Books',
+    'Food',
+    'Furniture',
+    'Home & Garden',
+    'Sports & Outdoors',
+    'Toys & Games',
+    'Beauty & Personal Care',
+    'Automotive',
+    'Health & Wellness',
+    'Office Supplies',
+    'Pet Supplies'
+  ];
   statusList = ['Available', 'Out-of-Stock'];
 
   constructor(
@@ -47,18 +62,51 @@ export class Product implements OnInit {
     });
   }
 
-  saveProduct() {
-    this.service.addProducts(this.product).subscribe({
-      next: () => {
-        this.product = {};
-        this.loadProducts();
-      },
-      error: (err) => {
-        console.error('Error saving product:', err);
-        this.error = 'Failed to save product.';
-        this.cdr.detectChanges();
-      },
-    });
+  saveOrUpdateProduct() {
+    if (this.editingId) {
+      // Update
+      this.service.updateProduct(this.editingId, this.product).subscribe({
+        next: () => {
+          this.resetForm();
+          this.loadProducts();
+        },
+        error: (err) => {
+          console.error('Error updating product:', err);
+          this.error = 'Failed to update product.';
+          this.cdr.detectChanges();
+        },
+      });
+    } else {
+      // Add new
+      this.service.addProducts(this.product).subscribe({
+        next: () => {
+          this.resetForm();
+          this.loadProducts();
+        },
+        error: (err) => {
+          console.error('Error saving product:', err);
+          this.error = 'Failed to save product.';
+          this.cdr.detectChanges();
+        },
+      });
+    }
+  }
+
+  editProduct(id: string) {
+    const prod = this.products.find((p: any) => p.id === parseInt(id));
+    if (prod) {
+      this.product = { ...prod };
+      this.editingId = id;
+    }
+  }
+
+  cancelEdit() {
+    this.resetForm();
+  }
+
+  private resetForm() {
+    this.product = {};
+    this.editingId = null;
   }
 
   deleteProduct(id: any) {

@@ -29,7 +29,21 @@ export class Categories implements OnInit {
 
   // Category data
   categories: CategoryData[] = [];
-  categoryList = ['Electronics', 'Clothing', 'Books', 'Food'];
+  categoryList = [
+    'Electronics',
+    'Clothing',
+    'Books',
+    'Food',
+    'Furniture',
+    'Home & Garden',
+    'Sports & Outdoors',
+    'Toys & Games',
+    'Beauty & Personal Care',
+    'Automotive',
+    'Health & Wellness',
+    'Office Supplies',
+    'Pet Supplies'
+  ];
 
   constructor(
     private productService: ProductService,
@@ -100,6 +114,25 @@ export class Categories implements OnInit {
   getCategoryPercentage(count: number): number {
     if (this.totalProducts === 0) return 0;
     return Math.round((count / this.totalProducts) * 100);
+  }
+
+  getCategoryIcon(categoryName: string): string {
+    const icons: { [key: string]: string } = {
+      'Electronics': '💻',
+      'Clothing': '👕',
+      'Books': '📚',
+      'Food': '🍔',
+      'Furniture': '🪑',
+      'Home & Garden': '🏡',
+      'Sports & Outdoors': '⚽',
+      'Toys & Games': '🎮',
+      'Beauty & Personal Care': '💄',
+      'Automotive': '🚗',
+      'Health & Wellness': '💊',
+      'Office Supplies': '📎',
+      'Pet Supplies': '🐾'
+    };
+    return icons[categoryName] || '📦';
   }
 }
 
