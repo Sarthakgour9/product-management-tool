@@ -1,5 +1,5 @@
 <div class="product-container">
-  <h1 class="page-title">📦 Product Management</h1>
+  <h1 class="page-title">📦 Product Management Dashboard</h1>
 
   <!-- Error Message -->
   <div *ngIf="error" class="error-message">
@@ -15,13 +15,13 @@
   <!-- Main Content -->
   <div *ngIf="!loading" class="main-content">
     
-    <!-- Stats Row -->
+    <!-- Enhanced Stats Row -->
     <div class="stats-row">
       <div class="stat-card">
         <div class="stat-icon">📦</div>
         <div class="stat-info">
-          <span class="stat-value">{{products.length}}</span>
-          <span class="stat-label">Total Products</span>
+          <span class="stat-value">{{filteredProducts.length}}</span>
+          <span class="stat-label">Products</span>
         </div>
       </div>
       
@@ -53,127 +53,115 @@
     <!-- Content Grid -->
     <div class="content-grid">
       
-      <!-- Add Product Card -->
+      <!-- Enhanced Add/Edit Form Card -->
       <div class="card form-section">
         <div class="card-header">
           <h2>{{ editingId ? '✏️ Edit Product' : '➕ Add New Product' }}</h2>
         </div>
         <div class="card-body">
-          <form>
+          <form #productForm="ngForm">
+            <div class="form-group">
+              <label>Product Name *</label>
+              <input type="text" placeholder="Enter product name" 
+                     [(ngModel)]="product.name" name="name" required>
+              <span class="validation-hint" *ngIf="productForm.submitted && !product.name">Name is required</span>
+            </div>
+            
             <div class="form-row">
               <div class="form-group">
-                <label>Product Name</label>
-                <input type="text" placeholder="Enter product name"
-                [(ngModel)]="product.name" name="name">
+                <label>Price (₹) *</label>
+                <input type="number" placeholder="Enter price" min="0" step="0.01"
+                       [(ngModel)]="product.price" name="price" required>
               </div>
               
               <div class="form-group">
-                <label>Price (₹)</label>
-                <input type="number" placeholder="Enter price"
-                [(ngModel)]="product.price" name="price">
+                <label>Category *</label>
+                <select [(ngModel)]="product.category" name="category" required>
+                  <option value="">Select Category</option>
+                  <option *ngFor="let c of categories" [value]="c">{{c}}</option>
+                </select>
               </div>
             </div>
             
             <div class="form-row">
               <div class="form-group">
-                <label>Category</label>
-                <select [(ngModel)]="product.category" name="category">
-                  <option value="">Select Category</option>
-                  <option *ngFor="let c of categories" [value]="c">
-                    {{c}}
-                  </option>
+                <label>Status *</label>
+                <select [(ngModel)]="product.status" name="status" required>
+                  <option value="">Select Status</option>
+                  <option *ngFor="let s of statusList" [value]="s">{{s}}</option>
                 </select>
               </div>
               
               <div class="form-group">
-                <label>Status</label>
-                <select [(ngModel)]="product.status" name="status">
-                  <option value="">Select Status</option>
-                  <option *ngFor="let s of statusList" [value]="s">
-                    {{s}}
-                  </option>
-                </select>
+                <label>Search Products</label>
+                <input type="text" placeholder="🔍 Search products..." 
+                       [(ngModel)]="searchTerm" name="search" (input)="onSearch()">
               </div>
             </div>
             
             <!-- Image Upload -->
             <div class="form-group full-width">
-              <label>Product Image</label>
+              <label>Product Image *</label>
               <input type="file" (change)="onImageSelected($event)" accept="image/*" name="image">
               <div *ngIf="imagePreview" class="image-preview">
                 <img [src]="imagePreview" alt="Preview" class="preview-img">
               </div>
-              <div *ngIf="product.image_url" class="current-image">
+              <div *ngIf="product.image_url && !imagePreview" class="current-image">
                 Current: <img [src]="'http://localhost:3000' + product.image_url" alt="Current" class="thumb-img">
               </div>
             </div>
             
             <div class="form-buttons">
-              <button class="save-btn" (click)="saveOrUpdateProduct()">
-                {{ editingId ? '💾 Update Product' : '💾 Save Product' }}
+              <button class="save-btn" type="button" (click)="saveOrUpdateProduct()" 
+                      [disabled]="!isFormValid()">
+                {{ editingId ? '💾 Update Product' : '💾 Add Product' }}
               </button>
-              <button *ngIf="editingId" class="cancel-btn" (click)="cancelEdit()" type="button">
-                Cancel
+              <button *ngIf="editingId" class="cancel-btn" type="button" (click)="cancelEdit()">
+                ❌ Cancel
               </button>
             </div>
           </form>
         </div>
       </div>
 
-      <!-- Products Table Card -->
-      <div class="card table-section">
+      <!-- Product Cards Grid -->
+      <div class="card products-section">
         <div class="card-header">
-          <h2>📋 Product List</h2>
+          <h2>📦 Products</h2>
+          <span class="count">{{filteredProducts.length}} found</span>
         </div>
         <div class="card-body">
-          <!-- Table -->
-          <div class="table-wrapper" *ngIf="products.length > 0">
-            <table>
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Price</th>
-                  <th>Category</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let p of products">
-                  <td>#{{p.id}}</td>
-                  <td>{{p.name}}</td>
-                  <td>₹ {{p.price}}</td>
-                  <td>{{p.category}}</td>
-                  <td>
-                    <span class="status-badge" 
-                          [class.available]="p.status === 'Available'" 
-                          [class.out-of-stock]="p.status === 'Out-of-Stock'">
-                      {{p.status}}
-                    </span>
-                  </td>
-                  <td>
-                    <button class="edit-btn" (click)="editProduct(p.id.toString())">
-                      ✏️ Edit
-                    </button>
-                    <button class="delete-btn" (click)="deleteProduct(p.id)">
-                      🗑️ Delete
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div *ngIf="filteredProducts.length > 0" class="products-grid">
+            <div *ngFor="let p of filteredProducts; trackBy: trackById" class="product-card">
+              <div class="product-image">
+                <img [src]="'http://localhost:3000' + p.image_url" [alt]="p.name" *ngIf="p.image_url">
+                <div class="no-image" *ngIf="!p.image_url">📦</div>
+              </div>
+              <div class="product-details">
+                <h3>{{p.name}}</h3>
+                <div class="price">₹ {{p.price}}</div>
+                <div class="category">{{p.category}}</div>
+                <span class="status-badge" 
+                      [class.available]="p.status === 'Available'" 
+                      [class.out-of-stock]="p.status === 'Out-of-Stock'">
+                  {{p.status}}
+                </span>
+              </div>
+              <div class="product-actions">
+                <button class="edit-btn" (click)="editProduct(p.id.toString())">✏️ Edit</button>
+                <button class="delete-btn" (click)="deleteProduct(p.id)">🗑️ Delete</button>
+              </div>
+            </div>
           </div>
           
           <!-- Empty State -->
-          <div *ngIf="products.length === 0" class="empty-state">
+          <div *ngIf="filteredProducts.length === 0" class="empty-state">
             <div class="empty-icon">📦</div>
-            <h3>No Products Found</h3>
-            <p>Add your first product using the form on the left!</p>
+            <h3>No Products {{searchTerm ? 'matching "' + searchTerm + '"' : 'Found'}}</h3>
+            <p>{{searchTerm ? 'Try different search term.' : 'Add your first product using the form!'}}</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-

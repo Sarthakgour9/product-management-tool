@@ -12,7 +12,9 @@ import { ProductService } from '../services/product-service';
 })
 export class Product implements OnInit {
   products: any[] = [];
+  filteredProducts: any[] = [];
   product: any = {};
+  searchTerm: string = '';
   selectedImage: File | null = null;
   imagePreview: string | null = null;
   editingId: string | null = null;
@@ -46,12 +48,17 @@ export class Product implements OnInit {
     this.loadProducts();
   }
 
+  onSearch() {
+    this.filterProducts();
+  }
+
   loadProducts() {
     this.loading = true;
 
     this.service.getProducts().subscribe({
       next: (res: any) => {
         this.products = res;
+        this.filteredProducts = [...res];
         this.loading = false;
         this.cdr.detectChanges();
       },
@@ -65,6 +72,11 @@ export class Product implements OnInit {
   }
 
   saveOrUpdateProduct() {
+    if (!this.isFormValid()) {
+      this.error = 'Please fill all required fields.';
+      return;
+    }
+
     const formData = new FormData();
     formData.append('name', this.product.name || '');
     formData.append('price', this.product.price?.toString() || '');
@@ -146,17 +158,43 @@ export class Product implements OnInit {
     });
   }
 
+  filterProducts() {
+    if (!this.searchTerm.trim()) {
+      this.filteredProducts = [...this.products];
+      return;
+    }
+    const term = this.searchTerm.toLowerCase();
+    this.filteredProducts = this.products.filter((p: any) => 
+      p.name.toLowerCase().includes(term) ||
+      p.category.toLowerCase().includes(term)
+    );
+  }
+
+  isFormValid(): boolean {
+    return !!(
+      this.product.name &&
+      this.product.price &&
+      this.product.category &&
+      this.product.status
+    );
+  }
+
+  trackById(index: number, item: any): any {
+    return item.id;
+  }
+
   // Helper methods for stats
   getAvailableCount(): number {
-    return this.products.filter((p: any) => p.status === 'Available').length;
+    return this.filteredProducts.filter((p: any) => p.status === 'Available').length;
   }
 
   getOutOfStockCount(): number {
-    return this.products.filter((p: any) => p.status === 'Out-of-Stock').length;
+    return this.filteredProducts.filter((p: any) => p.status === 'Out-of-Stock').length;
   }
 
   getUniqueCategories(): number {
-    const categories = new Set(this.products.map((p: any) => p.category));
+    const categories = new Set(this.filteredProducts.map((p: any) => p.category));
     return categories.size;
   }
 }
+
