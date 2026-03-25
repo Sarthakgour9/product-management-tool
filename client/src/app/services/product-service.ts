@@ -11,11 +11,11 @@ export class ProductService {                     //API communication layer
   getProducts() {
     return this.http.get(this.api);
   }
-  addProducts(data: any) {
-    return this.http.post(this.api, data);
+  addProducts(formData: FormData) {
+    return this.http.post(this.api, formData);
   }
-  updateProduct(id: any, data: any) {
-    return this.http.put(`${this.api}/${id}`, data);
+  updateProduct(id: any, formData: FormData) {
+    return this.http.put(`${this.api}/${id}`, formData);
   } 
   deleteProduct(id: any) {
     return this.http.delete(`${this.api}/${id}`);

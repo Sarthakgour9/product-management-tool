@@ -96,6 +96,18 @@
               </div>
             </div>
             
+            <!-- Image Upload -->
+            <div class="form-group full-width">
+              <label>Product Image</label>
+              <input type="file" (change)="onImageSelected($event)" accept="image/*" name="image">
+              <div *ngIf="imagePreview" class="image-preview">
+                <img [src]="imagePreview" alt="Preview" class="preview-img">
+              </div>
+              <div *ngIf="product.image_url" class="current-image">
+                Current: <img [src]="'http://localhost:3000' + product.image_url" alt="Current" class="thumb-img">
+              </div>
+            </div>
+            
             <div class="form-buttons">
               <button class="save-btn" (click)="saveOrUpdateProduct()">
                 {{ editingId ? '💾 Update Product' : '💾 Save Product' }}
