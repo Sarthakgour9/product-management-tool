@@ -1,11 +1,13 @@
 {
   "dependencies": {
-    "concurrently": "^9.2.1"
+    "concurrently": "^9.2.1",
+    "fs-extra": "^11.3.4",
+    "mkdirp": "^3.0.1",
+    "multer": "^2.1.1"
   },
-"scripts": {
- "client": "npm start --prefix client",
- "server": "nodemon server/server.js",
- "dev": "concurrently \"npm run server\" \"npm run client\""
-
-}
+  "scripts": {
+    "client": "npm start --prefix client",
+    "server": "nodemon server/server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  }
 }

@@ -13,6 +13,8 @@ import { ProductService } from '../services/product-service';
 export class Product implements OnInit {
   products: any[] = [];
   product: any = {};
+  selectedImage: File | null = null;
+  imagePreview: string | null = null;
   editingId: string | null = null;
   loading: boolean = false;
   error: string = '';
@@ -63,9 +65,17 @@ export class Product implements OnInit {
   }
 
   saveOrUpdateProduct() {
+    const formData = new FormData();
+    formData.append('name', this.product.name || '');
+    formData.append('price', this.product.price?.toString() || '');
+    formData.append('category', this.product.category || '');
+    formData.append('status', this.product.status || '');
+    if (this.selectedImage) {
+      formData.append('image', this.selectedImage);
+    }
+
     if (this.editingId) {
-      // Update
-      this.service.updateProduct(this.editingId, this.product).subscribe({
+      this.service.updateProduct(this.editingId, formData).subscribe({
         next: () => {
           this.resetForm();
           this.loadProducts();
@@ -77,8 +87,7 @@ export class Product implements OnInit {
         },
       });
     } else {
-      // Add new
-      this.service.addProducts(this.product).subscribe({
+      this.service.addProducts(formData).subscribe({
         next: () => {
           this.resetForm();
           this.loadProducts();
@@ -92,21 +101,36 @@ export class Product implements OnInit {
     }
   }
 
+  onImageSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedImage = file;
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.imagePreview = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  private resetForm() {
+    this.product = {};
+    this.selectedImage = null;
+    this.imagePreview = null;
+    this.editingId = null;
+  }
+
   editProduct(id: string) {
     const prod = this.products.find((p: any) => p.id === parseInt(id));
     if (prod) {
       this.product = { ...prod };
       this.editingId = id;
+      // Note: Image edit requires re-upload (no file preview from URL)
     }
   }
 
   cancelEdit() {
     this.resetForm();
-  }
-
-  private resetForm() {
-    this.product = {};
-    this.editingId = null;
   }
 
   deleteProduct(id: any) {
