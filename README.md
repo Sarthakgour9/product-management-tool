@@ -3,62 +3,71 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
-# 🛒 Product CRUD Application
+# 🛒 Product Management Dashboard
 
-A full-stack CRUD application built using **Angular, Node.js, Express, and PostgreSQL (NeonDB)**.
-The application allows users to **create, view, update, and delete product information** through a clean single-page interface.
+A modern full-stack CRUD application built using **Angular, Node.js, Express, and PostgreSQL**. Features a redesigned **Product Management Dashboard** (/products) with card-based UI, search, form validation, responsive design, and enhanced statistics.
 
 ---
 
 ## 🚀 Tech Stack
 
-Frontend:
+**Frontend:** Angular • TypeScript • HTML/CSS • Standalone Components
 
-* Angular
-* TypeScript
-* HTML/CSS
+**Backend:** Node.js • Express.js
 
-Backend:
+**Database:** PostgreSQL • NeonDB (Serverless)
 
-* Node.js
-* Express.js
-
-Database:
-
-* PostgreSQL
-* NeonDB (Serverless Cloud Database)
-
-Tools:
-
-* DBeaver
-* Concurrently
-* Nodemon
+**Tools:** Concurrently • Nodemon • DBeaver
 
 ---
 
 ## 📂 Project Structure
 
 ```
-product-crud-app
+angular-product-management/
 │
-├── client        # Angular frontend
-├── server        # Node + Express backend
+├── client/          # Angular frontend
+├── server/          # Node + Express backend
+├── uploads/         # Product images
 ├── README.md
 └── package.json
 ```
 
 ---
 
-## ⚙️ Features
+## ✨ Key Features
 
-* Add new products
-* View product list
-* Update product information
-* Delete products
-* Dropdown binding for product category
-* REST API integration
-* Cloud database using NeonDB
-* **Product Categories & Statistics page** - View products grouped by category with detailed breakdowns
+✅ **Modern Product Dashboard** (`/products`)
+* Card-based product display (vs table)
+* Real-time search/filter (name, category)
+* Form validation + required fields
+* Image preview/upload
+* Live statistics (counts, categories)
+* Responsive mobile-first design
+* Hover animations & gradients
+
+✅ **Full CRUD Operations**
+* Add/Edit/Delete products
+* Status management (Available/Out-of-Stock)
+* Image upload handling
+
+✅ **Additional Pages**
+* `/` - Home dashboard
+* `/categories` - Category analytics
+* `/add-product` - Dedicated add form
+* `/about` - Application info
+
+---
+
+## 🛣 Routes
+
+| Route          | Description                          | Features                          |
+|----------------|--------------------------------------|-----------------------------------|
+| `/products`    | **Main Dashboard**                  | Cards, search, stats, CRUD        |
+| `/`            | Home                                | Quick links                       |
+| `/categories`  | Category Analytics                  | Grouped statistics                |
+| `/add-product` | Standalone Add Form                 | Dedicated product creation        |
+| `/about`       | About                               | App information                   |
 
 ---
 
@@ -66,105 +75,102 @@ product-crud-app
 
 ```sql
 CREATE TABLE products (
- id SERIAL PRIMARY KEY,
- name VARCHAR(100),
- price NUMERIC,
- category VARCHAR(50),
- status VARCHAR(50)
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  price NUMERIC(10,2) NOT NULL,
+  category VARCHAR(50),
+  status VARCHAR(20) DEFAULT 'Available',
+  image_url VARCHAR(255)
 );
 ```
 
 ---
 
-## 🛣 Application Routes
+## 🚀 Quick Start
 
-| Route           | Component          | Description                      |
-| --------------- | ----------------- | -------------------------------- |
-| `/`             | Home              | Dashboard with quick links       |
-| `/products`     | Product           | Product list with add form       |
-| `/categories`   | Categories        | Statistics & category breakdown |
-| `/about`        | About             | About the application            |
-| `/add-product`  | AddProduct       | Standalone add product form      |
-
----
-
-## 🛠 Installation
-
-### 1️⃣ Clone Repository
-
-```
-git clone https://github.com/yourusername/product-crud-app.git
-cd product-crud-app
-```
-
-### 2️⃣ Install Dependencies
-
-```
+### 1. Clone & Install
+```bash
+git clone <repo>
+cd angular-product-management
 npm install
-cd client && npm install
-cd ../server && npm install
+cd client && npm install && cd ..
+cd server && npm install && cd ..
 ```
 
----
-
-### 3️⃣ Configure Environment Variables
-
-Create `.env` inside **server/**
-
-```
+### 2. Environment (.env in server/)
+```bash
 DATABASE_URL=your_neon_connection_string
 PORT=3000
+UPLOAD_DIR=./uploads
 ```
 
----
-
-### 4️⃣ Run Application
-
-```
+### 3. Run Development
+```bash
 npm run dev
+# or
+cd client && ng serve
+cd ../server && npm start
 ```
 
-Frontend:
-
-```
-http://localhost:4200
-```
-
-Backend API:
-
-```
-http://localhost:3000/api/products
-```
+**Frontend:** http://localhost:4200  
+**API:** http://localhost:3000/api/products
 
 ---
 
 ## 📡 API Endpoints
 
-| Method | Endpoint          | Description      |
-| ------ | ----------------- | ---------------- |
-| GET    | /api/products     | Get all products |
-| POST   | /api/products     | Add new product  |
-| PUT    | /api/products/:id | Update product   |
-| DELETE | /api/products/:id | Delete product   |
+```bash
+GET    /api/products      # List all
+POST   /api/products      # Create (multipart/form-data)
+PUT    /api/products/:id  # Update
+DELETE /api/products/:id  # Delete
+```
 
 ---
 
-## 🧠 Learning Outcomes
+## 🎨 UI Improvements (Recent)
 
-This project demonstrates:
+- **Card Layout**: Modern product cards with images
+- **Search**: Live filtering by name/category
+- **Stats**: Dynamic cards with gradients/hover
+- **Responsive**: Mobile-first, works on all devices
+- **Validation**: Form validation + error states
+- **Animations**: Smooth transitions & effects
+- **Images**: Preview + upload support
 
-* Angular component communication
-* REST API integration
-* Express backend architecture
-* PostgreSQL database queries
-* Environment variable management
-* Full-stack application structure
+---
+
+## 🧪 Testing the Dashboard
+
+1. Navigate to **http://localhost:4200/products**
+2. Add a product (fill all fields, upload image)
+3. Search by name or category
+4. Edit/Delete existing products
+5. Check stats update live
+6. Resize browser - fully responsive
+
+---
+
+## 🧠 What's New
+
+**Modern Design System:**
+- Tailwind-inspired spacing/color scheme
+- Glassmorphism cards & gradients
+- Micro-interactions (hover, focus)
+- Accessibility-ready form labels
 
 ---
 
 ## 👨‍💻 Author
 
-Sarthak Gour
+**Sarthak Gour**  
 B.Tech Computer Science (AI/ML)
 
-GitHub: https://github.com/sarthakgour9
+[GitHub](https://github.com/sarthakgour9)
+
+---
+
+## 📄 License
+
+MIT License - feel free to use and modify!
+
